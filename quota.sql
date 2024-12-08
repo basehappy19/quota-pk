@@ -62,15 +62,20 @@ CREATE TABLE IF NOT EXISTS `students` (
 CREATE TABLE IF NOT EXISTS `system_settings` (
   `id` int NOT NULL AUTO_INCREMENT,
   `registration_enabled` tinyint NOT NULL DEFAULT (0),
-  `registration_start_date` date DEFAULT NULL,
-  `registration_end_date` date DEFAULT NULL,
+  `registration_start_date` datetime DEFAULT NULL,
+  `registration_end_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Data exporting was unselected.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
+INSERT INTO `plans` (`code`, `name`, `min_GPAX`, `min_GPA_MAT`, `min_GPA_SCI`, `allow_ungrade`, `allow_not_meet_req`, `allow_behavior_fail`, `img_cover`, `color`, `order`) VALUES ('eng', 'ภาษาอังกฤษ – คณิตศาสตร์', 0, 0, 0, 0, 0, 0, 'eng.gif', 0, 2);
+INSERT INTO `plans` (`code`, `name`, `min_GPAX`, `min_GPA_MAT`, `min_GPA_SCI`, `allow_ungrade`, `allow_not_meet_req`, `allow_behavior_fail`, `img_cover`, `color`, `order`) VALUES ('mou', 'การจัดการธุรกิจการค้าสมัยใหม่ : MOU CP ALL', 0, 0, 0, 0, 0, 0, 'mou.gif', 0, 3);
+INSERT INTO `plans` (`code`, `name`, `min_GPAX`, `min_GPA_MAT`, `min_GPA_SCI`, `allow_ungrade`, `allow_not_meet_req`, `allow_behavior_fail`, `img_cover`, `color`, `order`) VALUES ('sci', 'วิทยาศาสตร์ – คณิตศาสตร์', 2.75, 2.5, 2.5, 0, 0, 0, 'sci.gif', 0, 1);
+
+INSERT INTO `system_settings` (`id`, `registration_enabled`, `registration_start_date`, `registration_end_date`) VALUES (1, 1, '2024-12-09 08:00:00', '2024-12-11 16:00:00');
