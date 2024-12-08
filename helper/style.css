@@ -287,3 +287,8 @@ main {
     transition: opacity 0.5s ease-in-out;
     animation: countdownAnimation 1s infinite; 
 }
+
+.hide-dot ul {
+    list-style-type: none;
+    padding: 0;
+}

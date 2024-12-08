@@ -14,27 +14,62 @@
                 <p class="m-0">จำนวนการสมัครแล้ว <?php echo (string)$plan['num_students'] ?> คน</p>
             </div>
             <hr>
-            <div>
+            <div class="hide-dot">
                 <ul>
                     <?php if ($plan['min_GPAX'] > 0) : ?>
-                        <li>GPAX ตั้งแต่ <?php echo $plan['min_GPAX'] ?></li>
+                        <li>
+                            <?php if ($student['GPAX'] >= $plan['min_GPAX']) : ?>
+                                <i class="fas fa-check text-success"></i>
+                            <?php else : ?>
+                                <i class="fas fa-times text-danger"></i>
+                            <?php endif; ?>
+                            GPAX ตั้งแต่ <?php echo $plan['min_GPAX'] ?>
+                        </li>
                     <?php endif; ?>
                     <?php if ($plan['min_GPA_MAT'] > 0) : ?>
-                        <li>GPA วิชาคณิตศาสตร์ ตั้งแต่ <?php echo $plan['min_GPA_MAT'] ?></li>
+                        <li>
+                            <?php if ($student['GPA_MAT'] >= $plan['min_GPA_MAT']) : ?>
+                                <i class="fas fa-check text-success"></i>
+                            <?php else : ?>
+                                <i class="fas fa-times text-danger"></i>
+                            <?php endif; ?>
+                            GPA วิชาคณิตศาสตร์ ตั้งแต่ <?php echo $plan['min_GPA_MAT'] ?>
+                        </li>
                     <?php endif; ?>
                     <?php if ($plan['min_GPA_SCI'] > 0) : ?>
-                        <li>GPA วิชาวิทยาศาสตร์ ตั้งแต่ <?php echo $plan['min_GPA_SCI'] ?></li>
+                        <li>
+                            <?php if ($student['GPA_SCI'] >= $plan['min_GPA_SCI']) : ?>
+                                <i class="fas fa-check text-success"></i>
+                            <?php else : ?>
+                                <i class="fas fa-times text-danger"></i>
+                            <?php endif; ?>
+                            GPA วิชาวิทยาศาสตร์ ตั้งแต่ <?php echo $plan['min_GPA_SCI'] ?>
+                        </li>
                     <?php endif; ?>
-                    <li>คะแนนความประพฤติไม่ติดลบ เกิน 100 คะแนน</li>
-                    <li>ต้องไม่มีผลการเรียน ติด 0 ร มส มผ</li>
+                    <li>
+                        <?php if ($student['behavior_pass'] === 1) : ?>
+                            <i class="fas fa-check text-success"></i>
+                        <?php else : ?>
+                            <i class="fas fa-times text-danger"></i>
+                        <?php endif; ?>
+                        คะแนนความประพฤติไม่ติดลบ เกิน 100 คะแนน
+                    </li>
+                    <li>
+                        <?php if ($student['GPA_Fail'] === 0) : ?>
+                            <i class="fas fa-check text-success"></i>
+                        <?php else : ?>
+                            <i class="fas fa-times text-danger"></i>
+                        <?php endif; ?>
+                        ต้องไม่มีผลการเรียน ติด 0 ร มส มผ
+                    </li>
                 </ul>
             </div>
             <?php
-            $currentDate = date('Y-m-d');
+            $settings['current_date'] = date('Y-m-d H:i:s');
             $isInRegistrationPeriod = ($settings['registration_enabled'] === 1) &&
-                ($currentDate >= $settings['registration_start_date'] && $currentDate < $settings['registration_end_date']);
+                ($settings['current_date'] >= $settings['registration_start_date'] && 
+                 $settings['current_date'] < $settings['registration_end_date']);
             ?>
-
             <?php if (!$isInRegistrationPeriod) : ?>
                 <p class="text-center text-danger">ปิดรับสมัครแล้ว</p>
             <?php elseif (
