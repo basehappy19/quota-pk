@@ -69,8 +69,6 @@
             $isInRegistrationPeriod = ($settings['registration_enabled'] === 1) &&
                 ($settings['current_date'] >= $settings['registration_start_date'] && 
                  $settings['current_date'] < $settings['registration_end_date']);
-                 dump($isInRegistrationPeriod);
-                 dump($settings);
             ?>
             <?php if (!$isInRegistrationPeriod) : ?>
                 <p class="text-center text-danger">ปิดรับสมัครแล้ว</p>
