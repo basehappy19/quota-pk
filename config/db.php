@@ -1,6 +1,10 @@
 <?php
 
-date_default_timezone_set('Asia/Bangkok');  // Add this line to set timezone
+date_default_timezone_set('Asia/Bangkok');
+
+if (!file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+    die('ไม่พบไดเรกทอรี vendor กรุณารันคำสั่ง "composer install" ก่อนใช้งาน');
+}
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
