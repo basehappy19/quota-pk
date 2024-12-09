@@ -1,14 +1,28 @@
 <?php
-$host = 'mysql';    
-$dbname = 'quota'; 
-$username = 'quota';
-$password = '1234';   
+
+date_default_timezone_set('Asia/Bangkok');
+
+if (!file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+    die('ไม่พบไดเรกทอรี vendor กรุณารันคำสั่ง "composer install" ก่อนใช้งาน');
+}
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->exec("SET NAMES utf8mb4");
+    $conn->exec("SET CHARACTER SET utf8mb4");
+    $conn->exec("SET CHARACTER_SET_CONNECTION=utf8mb4");
 
 } catch (PDOException $e) {
-    echo "การเชื่อมต่อฐานข้อมูลล้มเหลว: " . $e->getMessage();
+    die("การเชื่อมต่อฐานข้อมูลล้มเหลว: " . $e->getMessage());
 }
-?>

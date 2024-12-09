@@ -1,6 +1,6 @@
 <?php
 require './config/db.php';
-
+$regulation_url = $_ENV['REGULATION_URL'];
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ require './config/db.php';
                     <a id="btn-statistics" class="btn btn-danger animated-button" role="button" href="./statistics.php">
                         <i class="bi bi-bar-chart-steps"></i>&nbsp;สถิติการสมัครเรียน
                     </a>
-                    <a id="btn-regulations" class="btn btn-info animated-button" role="button" href="./regulations.php">
+                    <a id="btn-regulations" class="btn btn-info animated-button" role="button" href="<?php echo $regulation_url; ?>" target="_blank">
                         <i class="fas fa-book"></i>&nbsp;อ่านระเบียบการ
                     </a>
                 </div>
